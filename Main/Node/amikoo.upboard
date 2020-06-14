@@ -1,5 +1,6 @@
 const mqtt = require('mqtt')  
 const client = mqtt.connect('mqtt://192.168.15.212')
+// const client = mqtt.connect('mqtt://iot.eclipse.org')
 //const client = mqtt.connect('mqtt://10.215.56.158')
 //const client = mqtt.connect('mqtt://192.168.1.130')
 
@@ -8,7 +9,7 @@ var sys = require('sys')
 var exec = require('child_process').exec;
 var ban = 0
 
-function puts(error, stdout, stderr) { sys.puts(stdout) }
+function puts(error, stdout, stderr) { console.log(stdout) }
 
 function espeak(phrase) {
   var sleep = require('sleep')
@@ -16,7 +17,6 @@ function espeak(phrase) {
   sleep.msleep(500);
   exec("aplay audio.wav", puts);  
 }
-
 function talk(phrase,languaje,voz){
   var idioma=""
   var idioma2=""
@@ -45,33 +45,6 @@ function talk(phrase,languaje,voz){
     }
 }
 
-function servicealexa(command){
-  if(command=='start'){
-    var spawn = require("child_process").spawn
-
-	 if(voz==0){
-     		exec("echo Ahora sere alexa | espeak -ves -w audio.wav", puts);
-     		exec("aplay audio.wav", puts);
-    	} else if(voz==1){
-        	var comando = "echo 'Ahora sere alexa' | text2wave -eval '(voice_JuntaDeAndalucia__es_pa_diphone)' > /tmp/audio.wav && aplay /tmp/audio.wav"
-        	exec(comando)}
-
-    return spawn('sh', ['/home/Amikoo/AlexaDevice/run.sh'], {detached:true, stdio: 'ignore'})
-  }
-  if(command=='stop'){
-     return exec("killall -9 python3")
-  }
-}
-
-function servicegoogle(command){
-  if(command=='start'){
-     return exec("google-assistant-demo")
-  }
-  if(command=='stop'){
-     return exec("killall -9 google-assistant-demo")
-  }
-}
-
 function changevoice(command){
     if(command=='espeak'){
         exec("echo Espeak | espeak -ves -w audio.wav", puts);
@@ -95,10 +68,7 @@ client.on('connect', function () {
   client.subscribe('amikoo/sound/speechsynthetizer/decir')
   client.subscribe('amikoo/sound/speechsynthetizer/sagen')
   client.subscribe('amikoo/sound/speechsynthetizer/voice')
-
-  client.subscribe('amikoo/gc/visionapi')
-  client.subscribe('amikoo/gc/translatationapi')
-  
+ 
   client.subscribe('amikoo/tradition/sound')
   client.subscribe('amikoo/tradition/image')
   client.subscribe('amikoo/tradition/video')
@@ -111,10 +81,6 @@ client.on('connect', function () {
   client.subscribe('amikoo/cerebro')
   client.subscribe('amikoo/inteledison')
   
-  client.subscribe('amikoo/amazon/alexa')
-
-  client.subscribe('amikoo/google/assistant')
-
   client.publish('amikoo/connected', 'true')
   sendStateUpdate()
 })
@@ -126,7 +92,7 @@ client.on('message', function (topic, message) {
   process.chdir("../")}
   ban=1;
   //var directorio = process.cwd()+"/Script"
-  var directorio = "/home/norman/Desktop/Amikoo/Upboard/Script"
+  var directorio = "/home/Amikoo"
   switch (topic) {
     case 'amikoo/open':
       return handleRequestOpen(message)
@@ -141,14 +107,7 @@ client.on('message', function (topic, message) {
       return handleRequestSay(message,2,tipo)
     case 'amikoo/sound/speechsynthetizer/voice':
       return changevoice(message)
-
-    case 'amikoo/gc/visionapi':
-      var comando = directorio+"/gc/vision/label.py"
-      return exec("python3 "+comando)
-    case 'amikoo/gc/translatationapi':
-      var comando = directorio+"/gc/translate/traduccionfinal.py"
-      return exec("pyhton3 "+comando)
-
+    
     case 'amikoo/tradition/sound':
       var directorio1=directorio+"/tradition/media.py"
       var comando = "python3 "+directorio1+" Sound "+message
@@ -177,12 +136,6 @@ client.on('message', function (topic, message) {
       return handleSpeakAmikoo('En mi caso, mi cerebro esta aqui, en la caja azul!')
     case 'amikoo/inteledison':
       return handleSpeakAmikoo('Yo funciono con la plataforma Intel Edison')
-
-    case 'amikoo/amazon/alexa':
-      return servicealexa(message)
-    case 'amikoo/google/assistant':
-      return servicegoogle(message)
-
   }
 })
 
