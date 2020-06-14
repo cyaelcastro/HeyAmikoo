@@ -1,5 +1,5 @@
 const mqtt = require('mqtt')  
-const client = mqtt.connect('mqtt://iot.eclipse.org')
+const client = mqtt.connect('mqtt://192.168.15.212')
 //const client = mqtt.connect('mqtt://10.215.56.158')
 //const client = mqtt.connect('mqtt://192.168.1.130')
 
@@ -56,7 +56,7 @@ function servicealexa(command){
         	var comando = "echo 'Ahora sere alexa' | text2wave -eval '(voice_JuntaDeAndalucia__es_pa_diphone)' > /tmp/audio.wav && aplay /tmp/audio.wav"
         	exec(comando)}
 
-    return spawn('sh', ['/home/norman/Desktop/Amikoo/AlexaDevice/run.sh'], {detached:true, stdio: 'ignore'})
+    return spawn('sh', ['/home/Amikoo/AlexaDevice/run.sh'], {detached:true, stdio: 'ignore'})
   }
   if(command=='stop'){
      return exec("killall -9 python3")
