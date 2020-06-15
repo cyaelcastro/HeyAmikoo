@@ -1,0 +1,12 @@
+version: '3'
+services:
+  heyamikoo:
+    build:
+      context: .
+      dockerfile: Dockerfile.heyamikoo
+    container_name: heyamikoo
+    privileged: true
+    network_mode: host
+    ports:
+      - 1883:1883
+    restart: on-failure
