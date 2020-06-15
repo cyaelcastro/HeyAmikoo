@@ -1,0 +1,18 @@
+FROM node:14.4.0-stretch-slim
+
+WORKDIR /home/Amikoo
+
+COPY Main .
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    espeak \
+    feh \
+    mpv \
+    python3 \
+    mosquitto-clients \
+    build-essential
+
+RUN npm install
+
+CMD node main.js
