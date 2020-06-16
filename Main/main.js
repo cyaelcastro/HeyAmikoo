@@ -1,4 +1,5 @@
 const mqtt = require('mqtt')  
+const axios = require('axios')
 const client = mqtt.connect('mqtt://192.168.15.212')
 // const client = mqtt.connect('mqtt://iot.eclipse.org')
 //const client = mqtt.connect('mqtt://10.215.56.158')
@@ -44,6 +45,21 @@ function talk(phrase,languaje,voz){
         exec(comando)
     }
 }
+
+function text2speech(message){
+  axios.post('http://192.168.15.106:12101/api/text-to-speech', message, {
+    header: {
+      'Content-Type' : 'text/plain'
+    }
+  })
+  .then((res) => {
+    console.log(`statusCode: ${res.statusCode}`)
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+}
+
 
 function changevoice(command){
     if(command=='espeak'){
@@ -181,7 +197,8 @@ function handleAmikoo (message) {
 }
 
 function handleSpeakAmikoo (message) {
-  espeak(message)
+  // espeak(message)
+  text2speech(message)
 }
 
 function handleAppExit (options, err) {
