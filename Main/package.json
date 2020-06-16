@@ -9,7 +9,11 @@
   "author": "Yael Castro",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "mqtt": "^4.1.0",
     "sleep": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
