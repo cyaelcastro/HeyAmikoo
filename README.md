@@ -1,3 +1,12 @@
-# Amikoo
-Intel architecture based robot implementing vision, translation, and movement features. Linux Operating System
-Linux embedded, NodeJs, Python
+# HeyAmikoo
+Intel architecture based robot implementing:
+* ~~Vision~~
+* ~~Translation~~
+* Voice
+* Movement features. 
+
+With Linux Operating System, NodeJS y Python3 (Running in Docker Containers)
+
+Tested on:
+* RPi 3B
+* ~~Upboard~~
