@@ -4,8 +4,8 @@ Main/package-lock.json
 Main/node_modules
 
 #Rhasspy
-rhasspy/profile/*/acoustic_model
-rhasspy/profile/*/docker-compose.yml
-rhasspy/profile/*/intent_graph.pickle.gz
-rhasspy/profile/*/supervisord.*
-rhasspy/profile/*/g2p.fst
+rhasspy/profiles/*/acoustic_model
+rhasspy/profiles/*/docker-compose.yml
+rhasspy/profiles/*/intent_graph.pickle.gz
+rhasspy/profiles/*/supervisord.*
+rhasspy/profiles/*/g2p.fst
