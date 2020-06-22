@@ -1,0 +1,47 @@
+{
+    "dialogue": {
+        "system": "rhasspy"
+    },
+    "handle": {
+        "system": "hass"
+    },
+    "home_assistant": {
+        "access_token": "#Put Hass Access Token Here",
+        "handle_type": "event",
+        "url": "http://192.168.15.212:8123"
+    },
+    "intent": {
+        "system": "fsticuffs"
+    },
+    "microphone": {
+        "pyaudio": {
+            "device": "2"
+        },
+        "system": "pyaudio"
+    },
+    "mqtt": {
+        "enabled": "true",
+        "host": "192.168.15.212"
+    },
+    "sounds": {
+        "aplay": {
+            "device": "sysdefault:CARD=C320M"
+        },
+        "system": "aplay"
+    },
+    "speech_to_text": {
+        "system": "pocketsphinx"
+    },
+    "text_to_speech": {
+        "nanotts": {
+            "language": "es-ES"
+        },
+        "system": "nanotts"
+    },
+    "wake": {
+        "porcupine": {
+            "sensitivity": "0.5"
+        },
+        "system": "porcupine"
+    }
+}
