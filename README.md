@@ -1,4 +1,7 @@
 # HeyAmikoo
+
+![alt text](https://github.com/cyaelcastro/HeyAmikoo/blob/master/media/2-short.png?raw=true)
+
 Intel architecture based robot implementing:
 * ~~Vision~~
 * ~~Translation~~
