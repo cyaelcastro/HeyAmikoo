@@ -15,10 +15,10 @@ def photo_name():
   name = str(now.year)+"-"+str(now.month)+"-"+str(now.day)+"-"+str(now.hour)+"-"+str(now.minute)+"-"+str(now.second)
   name = str(name)+".jpg"
   return name
-
+ 
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
 def take_picture(file_name):
-  os.system("fswebcam -r 800x480 --jpeg 80 --no-banner --save " + file_name)
+  photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_name])
   os.system("mv "+file_name+" /home/lupe/Desktop/photos/"+file_name)
   shutil.move(file_name,"/home/lupe/Desktop/photos/"+file_name)
   return "/home/lupe/Desktop/photos/"+file_name
