@@ -21,12 +21,16 @@ def photo_name():
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
 def take_picture(file_name):
   photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_name])
-  
+
 
 #Move picture from current directory to the target directory
 def move_picture(file_name):
-  shutil.move(file_name,target_directory+file_name)
-
+  try:
+    shutil.move(file_name,target_directory+file_name)
+  except FileNotFoundError as identifier:
+    print("Can't move picture, file doesn't exist")
+    return 2
+  
 
 #Verifies the picture generated exists correspond with the supported file extensions, after that 
 #open the picture with EOG
