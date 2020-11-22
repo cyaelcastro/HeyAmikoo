@@ -7,7 +7,7 @@ import imghdr
 
 #Tuple with image supported filles
 supported_files = ("png","jpg","jpeg")
-
+target_directory = "/home/lupe/Desktop/photos/"
 
 #Get date and generate a jpg file name
 def photo_name():
@@ -19,8 +19,8 @@ def photo_name():
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
 def take_picture(file_name):
   photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_name])
-  shutil.move(file_name,"/home/lupe/Desktop/photos/"+file_name)
-  return "/home/lupe/Desktop/photos/"+file_name
+  shutil.move(file_name,target_directory+file_name)
+  return target_directory+file_name
 
 
 #Verifies the picture generated exists correspond with the supported file extensions, after that 
