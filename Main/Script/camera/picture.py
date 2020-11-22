@@ -10,6 +10,14 @@ supported_files = ("png","jpg","jpeg")
 target_directory = "/home/lupe/Desktop/photos/"
 
 
+#Check if any camera is detected
+def check_camera():
+  check_camera = subprocess.run(["ls","/dev/video*"])
+  if check_camera.stderr != 0:
+    print("Camera not found") 
+    return 3
+
+
 #Get date and generate a jpg file name
 def photo_name():
   now = datetime.datetime.now()
@@ -55,6 +63,7 @@ def main():
   #Close any previous execution of EOG
   os.system("killall -9 eog")
   
+  check_camera()
   file_name = photo_name()
   take_picture(file_name)
   move_picture(file_name)
