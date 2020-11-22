@@ -9,23 +9,29 @@ import imghdr
 supported_files = ("png","jpg","jpeg")
 target_directory = "/home/lupe/Desktop/photos/"
 
+
 #Get date and generate a jpg file name
 def photo_name():
   now = datetime.datetime.now()
   name = str(now.year)+"-"+str(now.month)+"-"+str(now.day)+"-"+str(now.hour)+"-"+str(now.minute)+"-"+str(now.second)
   name = str(name)+".jpg"
   return name
- 
+
+
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
 def take_picture(file_name):
   photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_name])
+  
+
+#Move picture from current directory to the target directory
+def move_picture(file_name):
   shutil.move(file_name,target_directory+file_name)
-  return target_directory+file_name
 
 
 #Verifies the picture generated exists correspond with the supported file extensions, after that 
 #open the picture with EOG
-def show_picture(file_location):
+def show_picture(file_name):
+  file_location = target_directory+file_name
   try:
     imghdr.what(file_location)
   except FileNotFoundError:
@@ -46,8 +52,9 @@ def main():
   os.system("killall -9 eog")
   
   file_name = photo_name()
-  file_location = take_picture(file_name)
-  show_picture(file_location)
+  take_picture(file_name)
+  move_picture(file_name)
+  show_picture(file_name)
     
   return 0  
 
