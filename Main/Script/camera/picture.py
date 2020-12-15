@@ -4,6 +4,11 @@ import shutil
 import time
 import subprocess
 import imghdr
+from pathlib import Path
+
+
+#Camera index
+CAMERA_INDEX = "/dev/video0"
 
 #Tuple with image supported filles
 supported_files = ("png","jpg","jpeg")
@@ -11,11 +16,13 @@ target_directory = "/home/lupe/Desktop/photos/"
 
 
 #Check if any camera is detected
-def check_camera():
-  check_camera = subprocess.run(["ls","/dev/video*"])
-  if check_camera.stderr != 0:
-    print("Camera not found") 
-    return 3
+def check_camera(camera_resource):
+  camera_file = Path(camera_resource)
+  
+  if camera_file.exists():
+    return 0
+  else:
+    raise TypeError("Camera not found")
 
 
 #Get date and generate a jpg file name
@@ -63,7 +70,7 @@ def main():
   #Close any previous execution of EOG
   os.system("killall -9 eog")
   
-  check_camera()
+  check_camera(CAMERA_INDEX)
   file_name = photo_name()
   take_picture(file_name)
   move_picture(file_name)
