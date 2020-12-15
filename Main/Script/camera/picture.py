@@ -40,8 +40,12 @@ def photo_location(file_name):
 
 
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
-def take_picture(file_name):
-  photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_name])
+def take_picture(file_location):
+  photo_subprocess = subprocess.run(["fswebcam","-r","800x480","--jpeg","80","--no-banner","--save",file_location])
+  if photo_subprocess.stderr != None:
+    raise TypeError("Error taking picture")
+  else:
+    return 0
 
 
 #Move picture from current directory to the target directory
@@ -79,7 +83,7 @@ def main():
   check_camera(CAMERA_INDEX)
   file_name = photo_name()
   file_location = photo_location(file_name)
-  take_picture(file_name)
+  take_picture(file_location)
   move_picture(file_name)
   show_picture(file_name)
     
