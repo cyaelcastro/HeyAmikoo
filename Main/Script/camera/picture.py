@@ -6,14 +6,14 @@ import time
 import subprocess
 import imghdr
 from pathlib import Path
-
+from getpass import getuser
 
 #Camera index
 CAMERA_INDEX = "/dev/video0"
 
 #Tuple with image supported filles
 supported_files = ("png","jpg","jpeg")
-target_directory = "/home/lupe/Desktop/photos/"
+target_directory = "/home/"+getuser()+"/Desktop/photos/"
 
 
 #Check if any camera is detected
