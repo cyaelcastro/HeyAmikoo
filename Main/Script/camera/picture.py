@@ -2,7 +2,6 @@ import os
 import datetime
 import shutil
 import sys
-import time
 import subprocess
 import imghdr
 from pathlib import Path
