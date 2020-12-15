@@ -1,6 +1,7 @@
 import os
 import datetime
 import shutil
+import sys
 import time
 import subprocess
 import imghdr
@@ -31,6 +32,11 @@ def photo_name():
   name = str(now.year)+"-"+str(now.month)+"-"+str(now.day)+"-"+str(now.hour)+"-"+str(now.minute)+"-"+str(now.second)
   name = str(name)+".jpg"
   return name
+
+
+#Generate folder where the pictures will be stored at first
+def photo_location(file_name):
+  return sys.path[0]+"/"+file_name
 
 
 #Take picture from camera with 800x480 resolution in jpeg format and move it to Desktop/photos folder
@@ -72,6 +78,7 @@ def main():
   
   check_camera(CAMERA_INDEX)
   file_name = photo_name()
+  file_location = photo_location(file_name)
   take_picture(file_name)
   move_picture(file_name)
   show_picture(file_name)
