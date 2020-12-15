@@ -49,12 +49,16 @@ def take_picture(file_location):
 
 
 #Move picture from current directory to the target directory
-def move_picture(file_name):
-  try:
-    shutil.move(file_name,target_directory+file_name)
-  except FileNotFoundError as identifier:
-    print("Can't move picture, file doesn't exist")
-    return 2
+def move_picture(file_name, file_location):
+  
+  if Path(file_location).exists():
+    if not Path(target_directory).exists():
+      Path(target_directory).mkdir()
+
+    shutil.move(file_location,target_directory+file_name)
+    return 0
+  else:
+    raise TypeError("Can't move picture, file doesn't exist")
   
 
 #Verifies the picture generated exists correspond with the supported file extensions, after that 
@@ -84,7 +88,7 @@ def main():
   file_name = photo_name()
   file_location = photo_location(file_name)
   take_picture(file_location)
-  move_picture(file_name)
+  move_picture(file_name, file_location)
   show_picture(file_name)
     
   return 0  
