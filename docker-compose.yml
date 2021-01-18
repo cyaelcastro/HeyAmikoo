@@ -13,7 +13,7 @@ services:
     depends_on: 
       - rhasspy
   rhasspy:
-    image: "rhasspy/rhasspy"
+    image: "rhasspy/rhasspy:2.5.9"
     container_name: rhasspy
     restart: unless-stopped
     volumes:
