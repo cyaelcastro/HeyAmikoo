@@ -12,4 +12,4 @@ With Linux Operating System, NodeJS y Python3 (Running in Docker Containers)
 
 Tested on:
 * RPi 3B
-* ~~Upboard~~
+* Upboard Squared (Ubuntu 16.04)
